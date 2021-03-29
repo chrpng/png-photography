@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: 'Gatsby Starter - Strata by HTML5 UP',
@@ -20,5 +24,22 @@ module.exports = {
     },
     'gatsby-plugin-sass',
     'gatsby-plugin-offline',
+		`gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+		{
+      resolve: `gatsby-source-prismic`,
+      options: {
+        repositoryName: `png-photography`,
+        accessToken: `${process.env.API_KEY}`,
+        linkResolver: ({ node, key, value }) => post => `/${post.uid}`,
+        schemas: {
+					post: require("./src/schemas/page.json"),
+					gallery: require("./src/schemas/gallery.json"),
+					sidebar_card: require("./src/schemas/sidebar_card.json"),
+					section: require("./src/schemas/section.json"),
+				},
+      },
+    },
   ],
 }

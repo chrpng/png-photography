@@ -4,12 +4,16 @@ import full03 from '../../../assets/images/fulls/03.jpg'
 import full04 from '../../../assets/images/fulls/04.jpg'
 import full05 from '../../../assets/images/fulls/05.jpg'
 import full06 from '../../../assets/images/fulls/06.jpg'
+import full07 from '../../../assets/images/fulls/07.jpg'
+import full08 from '../../../assets/images/fulls/08.jpg'
 import thumb02 from '../../../assets/images/thumbs/02.jpg'
 import thumb01 from '../../../assets/images/thumbs/01.jpg'
 import thumb03 from '../../../assets/images/thumbs/03.jpg'
 import thumb04 from '../../../assets/images/thumbs/04.jpg'
 import thumb05 from '../../../assets/images/thumbs/05.jpg'
 import thumb06 from '../../../assets/images/thumbs/06.jpg'
+import thumb07 from '../../../assets/images/thumbs/07.jpg'
+import thumb08 from '../../../assets/images/thumbs/08.jpg'
 
 
 export const DEFAULT_IMAGES = [
@@ -53,6 +57,20 @@ export const DEFAULT_IMAGES = [
       source: full06,
       thumbnail: thumb06,
       caption: 'Photo 6',
+      description: 'Lorem ipsum dolor sit amet nisl sed nullam feugiat.',
+    },
+    {
+      id: '7',
+      source: full07,
+      thumbnail: thumb07,
+      caption: 'Photo 7',
+      description: 'Lorem ipsum dolor sit amet nisl sed nullam feugiat.',
+    },
+    {
+      id: '8',
+      source: full08,
+      thumbnail: thumb08,
+      caption: 'Photo 8',
       description: 'Lorem ipsum dolor sit amet nisl sed nullam feugiat.',
     }
 ]

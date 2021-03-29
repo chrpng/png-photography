@@ -4,7 +4,13 @@ import Carousel, { Modal, ModalGateway } from 'react-images'
 import GalleryItem from './GalleryItem'
 import { DEFAULT_IMAGES } from '../constants/defaultImages'
 
-const Gallery = ({ images = DEFAULT_IMAGES }) => {
+import { useStaticQuery, graphql } from "gatsby"
+
+import { GatsbyImage } from "gatsby-plugin-image"
+
+import Img from 'gatsby-image'
+
+const Gallery = ({ imageItems }) => {
   const [lightboxIsOpen, setLightboxIsOpen] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
 
@@ -13,28 +19,33 @@ const Gallery = ({ images = DEFAULT_IMAGES }) => {
     setSelectedIndex(selectedIndex)
   }, [lightboxIsOpen])
 
+	const imageObjectsForCarousel = imageItems.map((obj) => {
+		return { 
+			source: obj.gallery_image.url
+		}
+	})
+
+	// console.log(imageObjectsForCarousel)
+
   return (
     <div>
-      {images && (<div className="row">
-        {images.map((obj, i) => {
-        return (<GalleryItem
-          id={obj.id}
-          source={obj.source}
-          thumbnail={obj.thumbnail}
-          caption={obj.caption}
-          description={obj.description}
-          position={obj.position}
-          toggleLightbox={obj.toggleLightbox}
-          position={i}
-          toggleLightbox={toggleLightbox}
-        />); 
+      {imageItems && (<div className="masonry-with-columns">
+        {imageItems.map((obj, i) => {
+					return (
+						<GalleryItem
+							key={i}
+							thumbnail={obj.gallery_image.fluid}
+							position={i}
+							toggleLightbox={toggleLightbox}
+						/>
+					); 
         })}
         </div>
       )}
       <ModalGateway>
         {lightboxIsOpen && (
           <Modal onClose={toggleLightbox}>
-            <Carousel currentIndex={selectedIndex} views={images} />
+            <Carousel currentIndex={selectedIndex} views={imageObjectsForCarousel} />
           </Modal>
         )}
       </ModalGateway>

@@ -1,11 +1,11 @@
 import React from 'react'
 import '../assets/scss/main.scss'
 
-import Header from './Header'
+import Sidebar from './Sidebar'
 
 const Template = ({ children }) => (
   <div>
-    <Header />
+    <Sidebar />
     {children}
   </div>
 )
