@@ -10,6 +10,8 @@ import { GatsbyImage } from "gatsby-plugin-image"
 
 import Img from 'gatsby-image'
 
+import View from './View'
+
 const Gallery = ({ imageItems }) => {
   const [lightboxIsOpen, setLightboxIsOpen] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
@@ -20,9 +22,7 @@ const Gallery = ({ imageItems }) => {
   }, [lightboxIsOpen])
 
 	const imageObjectsForCarousel = imageItems.map((obj) => {
-		return { 
-			source: obj.gallery_image.url
-		}
+		return obj.gallery_image.fluid
 	})
 
 	// console.log(imageObjectsForCarousel)
@@ -45,7 +45,7 @@ const Gallery = ({ imageItems }) => {
       <ModalGateway>
         {lightboxIsOpen && (
           <Modal onClose={toggleLightbox}>
-            <Carousel currentIndex={selectedIndex} views={imageObjectsForCarousel} />
+            <Carousel currentIndex={selectedIndex} components={{ View }} views={imageObjectsForCarousel} />
           </Modal>
         )}
       </ModalGateway>
