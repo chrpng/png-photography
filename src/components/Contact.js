@@ -3,6 +3,7 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 
 import sanitizeHtml from 'sanitize-html'
+import { useForm } from "react-hook-form"
 
 const Contact = () => {
 	const data = useStaticQuery(graphql`
@@ -19,6 +20,34 @@ const Contact = () => {
 			}
 		}
 	`)
+
+	const { register, handleSubmit, formState: { errors }, reset } = useForm();
+
+	const encode = (data) => {
+    return Object.keys(data)
+			.map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+			.join("&")
+  }
+
+	const onSubmit = (data, e) => {
+		e.preventDefault()
+		fetch("/", {
+			method: "POST",
+			headers: { "Content-Type": "application/x-www-form-urlencoded" },
+			body: encode({
+				"form-name": "contact-pngphotography",
+				...data
+			})
+		})
+		.then(() => {
+			alert('Thanks for reaching out! I will get back to you as soon as possible.')
+			reset()
+		})
+		.catch(() => {
+			alert('Something went wrong...')
+		})
+	}
+	
 	return (
 		<section id="contact">
 			<h2>{data.prismicSection.data.title.text}</h2>
@@ -26,7 +55,9 @@ const Contact = () => {
 			<div className="row">
 				{/* <div className="12u 12u$(small)"> */}
 				<div className="8u 12u$(small)">
-					<form method="post" action="#">
+					<form data-netlify="true" name="contact-pngphotography" method="post" netlify-honeypot="bot-field" onSubmit={handleSubmit(onSubmit)}>
+						<input type="hidden" name="form-name" value="contact-pngphotography" />
+						<input type="hidden" name="bot-field" />
 						<div className="row uniform 50%">
 							<div className="6u 12u$(xsmall)">
 								<input
@@ -34,7 +65,9 @@ const Contact = () => {
 									name="name"
 									id="name"
 									placeholder="Name"
+									ref={register({ required: true })}
 								/>
+								{errors.name && <span className="form-error">This field is required</span>}
 							</div>
 							<div className="6u 12u$(xsmall)">
 								<input
@@ -42,7 +75,10 @@ const Contact = () => {
 									name="email"
 									id="email"
 									placeholder="Email"
+									ref={register({ required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })}
 								/>
+								{errors.email?.type === "required" && <span className="form-error">This field is required</span>}
+								{errors.email?.type === "pattern" && <span className="form-error">This is not a valid email</span>}
 							</div>
 							<div className="12u">
 								<textarea
@@ -50,7 +86,9 @@ const Contact = () => {
 									id="message"
 									placeholder="Message"
 									rows="4"
+									ref={register({ required: true })}
 								></textarea>
+								{errors.message && <span className="form-error">This field is required</span>}
 							</div>
 						</div>
 						<ul className="actions" style={{ marginTop: 30 }}>
@@ -60,32 +98,6 @@ const Contact = () => {
 						</ul>
 					</form>
 				</div>
-				{/* <div className="4u 12u$(small)">
-					<ul className="labeled-icons">
-						<li>
-							<h3 className="icon fa-home">
-								<span className="label">Address</span>
-							</h3>
-							1234 Somewhere Rd.
-							<br />
-							Nashville, TN 00000
-							<br />
-							United States
-						</li>
-						<li>
-							<h3 className="icon fa-mobile">
-								<span className="label">Phone</span>
-							</h3>
-							000-000-0000
-						</li>
-						<li>
-							<h3 className="icon fa-envelope-o">
-								<span className="label">Email</span>
-							</h3>
-							<a href="#">hello@untitled.tld</a>
-						</li>
-					</ul>
-				</div> */}
 			</div>
 		</section>
 	)
