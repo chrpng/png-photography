@@ -41,9 +41,9 @@ const GalleryWrapper = () => {
 			<h2>Portfolio</h2>
         
 			<ul className="actions">
-				{titles.filter((title) => title !== 'Misc').map((title) => {
+				{titles.filter((title) => title !== 'Misc').map((title, i) => {
 					return (
-						<li>
+						<li key={i}>
 							<button className="button" onClick={() => handleGalleryClick(title)}>
 								{title}
 							</button>

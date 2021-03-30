@@ -10,6 +10,7 @@ import Img from 'gatsby-image'
 import sanitizeHtml from 'sanitize-html'
 
 const sections = [
+  { id: 'instagram-feed', name: 'Feed', icon: 'fa-instagram' },
   { id: 'portfolio', name: 'Portfolio', icon: 'fa-th' },
   { id: 'about', name: 'About Me', icon: 'fa-user' },
   { id: 'contact', name: 'Contact', icon: 'fa-envelope' },
