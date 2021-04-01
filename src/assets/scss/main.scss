@@ -458,11 +458,9 @@
     grid-auto-rows: 12vw;
     grid-gap: 0.5em;
 
-  // a {
-  //   height: 200px;
-  //   margin: 0 1rem 1rem 0;
-  //   flex: 1 0 content;
-	// 	overflow: hidden;
+  > img {
+		height: 100%
+	}
 
 	> :nth-child(6n + 3) {
 		grid-column: span 1;
@@ -500,7 +498,11 @@
 .instagram-grid {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-	grid-gap: 16px;
+	grid-gap: 0.5em;
+
+	> * {
+		border-radius: _size(border-radius);
+	}
 }
 
 /* Image */

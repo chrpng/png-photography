@@ -1,10 +1,10 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 
-import GalleryWrapper from '../components/GalleryWrapper'
+import { GalleryWrapper } from '../components/GalleryWrapper'
 import Layout from '../components/layout'
 
-import InstaFeed from '../components/InstaFeed'
+import InstaFeed from '../components/InstaFeed/InstaFeed'
 import About from '../components/About'
 import Contact from '../components/Contact'
 
@@ -20,11 +20,11 @@ const HomeIndex = () => {
       </Helmet>
 
       <div id="main">
-        <InstaFeed />
-
 				<GalleryWrapper />
 
 				<About />
+
+				<InstaFeed />
 
         <Contact />
       </div>

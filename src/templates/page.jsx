@@ -1,28 +1,26 @@
 import React from "react"
 import { graphql } from "gatsby"
-const Post = ({ data: { prismicPage } }) => {
-  const { data } = prismicPage
+
+import sanitizeHtml from 'sanitize-html'
+
+const Post = ({ data: { graphCmsPage } }) => {
   return (
     <React.Fragment>
-      <h1>{data.title.text}</h1>
-      {/* <div dangerouslySetInnerHTML={{ __html: data.description.html }} /> */}
-      <div>{data.description.text}</div>
+      <h1>{graphCmsPage.title}</h1>
+      <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(graphCmsPage.content.html) }} />
+      {/* <div>{data.description.text}</div> */}
     </React.Fragment>
   )
 }
+
 export default Post
 export const pageQuery = graphql`
-  query PageBySlug($uid: String!) {
-    prismicPage(uid: { eq: $uid }) {
-      uid
-      data {
-        title {
-          text
-        }
-        description {
-          text
-        }
-      }
-    }
+  query PageBySlug($slug: String!) {
+    graphCmsPage(slug: {eq: $slug}) {
+			title
+			content {
+				html
+			}
+		}
   }
 `

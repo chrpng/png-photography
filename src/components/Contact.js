@@ -8,14 +8,10 @@ import { useForm } from "react-hook-form"
 const Contact = () => {
 	const data = useStaticQuery(graphql`
 		query ContactQuery {
-			prismicSection(uid: {eq: "contact"}) {
-				data {
-					content {
-						html
-					}
-					title {
-						text
-					}
+			graphCmsSection(slug: {eq: "contact"}) {
+				title
+				content {
+					html
 				}
 			}
 		}
@@ -50,8 +46,8 @@ const Contact = () => {
 	
 	return (
 		<section id="contact">
-			<h2>{data.prismicSection.data.title.text}</h2>
-			<div dangerouslySetInnerHTML={{ __html: sanitizeHtml(data.prismicSection.data.content.html) }}/>
+			<h2>{data.graphCmsSection.title}</h2>
+			<div dangerouslySetInnerHTML={{ __html: sanitizeHtml(data.graphCmsSection.content.html) }}/>
 			<div className="row">
 				{/* <div className="12u 12u$(small)"> */}
 				<div className="8u 12u$(small)">

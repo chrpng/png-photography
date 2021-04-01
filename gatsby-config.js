@@ -28,19 +28,14 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
 		{
-      resolve: `gatsby-source-prismic`,
-      options: {
-        repositoryName: `png-photography`,
-        accessToken: `${process.env.API_KEY}`,
-        linkResolver: ({ node, key, value }) => post => `/${post.uid}`,
-        schemas: {
-					post: require("./src/schemas/page.json"),
-					gallery: require("./src/schemas/gallery.json"),
-					sidebar_card: require("./src/schemas/sidebar_card.json"),
-					section: require("./src/schemas/section.json"),
+			resolve: 'gatsby-source-graphcms',
+				options: {
+					// Your GraphCMS API endpoint. Available from your project settings.
+					endpoint: process.env.GRAPHCMS_ENDPOINT,
+					// A PAT (Permanent Auth Token) for your project. Required if your project is not available publicly, or you want to scope access to a specific content stage (i.e. draft content).
+					token: process.env.GRAPHCMS_TOKEN
 				},
-      },
-    },
+		},
 		{
 			resolve: `gatsby-source-instagram`,
 			options: {

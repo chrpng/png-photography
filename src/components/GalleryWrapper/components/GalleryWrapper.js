@@ -1,39 +1,56 @@
-import React, { useState, useCallback } from 'react'
-import PropTypes from 'prop-types'
-import Carousel, { Modal, ModalGateway } from 'react-images'
-import GalleryItem from './GalleryItem'
+import React, { useState } from 'react'
 import Gallery from './Gallery'
-import { DEFAULT_IMAGES } from '../constants/defaultImages'
 
 import { useStaticQuery, graphql } from "gatsby"
 
-import { GatsbyImage } from "gatsby-plugin-image"
-
-import Img from 'gatsby-image'
+// import { generateImageData } from "gatsby-plugin-image"
 
 const GalleryWrapper = () => {
-	const data = useStaticQuery(ALL_IMAGES)
+	const data = useStaticQuery(ALL_GRAPHCMS_IMAGES)
 
-	// const [index, setIndex] = useState(0)
-	const [imageItems, setImageItems] = useState(data.galleries.edges[0].node.items)
-
-	// const imageItems = data.galleries.edges[0].node.items
-	const titles = data.galleries.edges.map((gallery) => (gallery.node.primary.name_of_the_gallery.text))
+	// const [currentGallery, setCurrentGallery] = useState(data.galleries.nodes[0].title)
+	// const [imageObjs, setImageObjs] = useState(data.galleries.nodes[0].images)
+	const [imageObjs, setImageObjs] = useState(data.galleries.nodes[0].images)
+	const titles = data.galleries.nodes.map(node => node.title)
 
 	const handleGalleryClick = (title) => {
-		const gallerySelection = data.galleries.edges.find((gallery) => {
-			return gallery.node.primary.name_of_the_gallery.text === title
-		})
-
-		setImageItems(gallerySelection.node.items)
+		// const selectedNode = data.galleries.nodes.find((node) => {
+		// 	return node.title === title
+		// })
+		// switch(title) {
+		// 	case "Portrait":
+		// 		// setImageObjs(data.portrait.images)
+		// 		setImageObjs(data.galleries.nodes.find(node => node.title === "Portrait").images)
+		// 		break;
+		// 	case "Events":
+		// 		setImageObjs(data.galleries.nodes.find(node => node.title === "Events").images)
+		// 		break;
+		// 	default:
+		// 		setImageObjs(data.portrait.images)
+		// }
+		const selectedGallery = data.galleries.nodes.find(node => node.title === title)
+		console.log(selectedGallery)
+		setImageObjs(data.galleries.nodes.find(node => node.title === title).images)
+		// console.log(selectedNode.title)
+		// console.log(selectedNode.images)
+		// setImageObjs(selectedNode.images)
+		// setCurrentGallery(selectedNode.title)
 	}
 
+	// const imageObjs = (() => {
+	// 	const obj = data.galleries.nodes.find(node => node.title === currentGallery).images
+	// 	console.log(obj)
+	// 	return obj
+	// })()
 	const handleAllGalleryClick = () => {
-		const allGalleryItems = data.galleries.edges.reduce((galleryItems, gallerySelection) => {
-			return galleryItems.concat(gallerySelection.node.items)
+		const allGalleryImages = data.galleries.nodes.reduce((accumGalleryImages, currentGalleryImages) => {
+			return accumGalleryImages.concat(currentGalleryImages.images)
 		}, [])
 
-		setImageItems(allGalleryItems)
+		console.log(allGalleryImages)
+		// console.log(allGalleryImages.images)
+		setImageObjs(allGalleryImages)
+		// setImageObjs(data.galleries.nodes[0].images)
 	}
 	
   return (
@@ -57,30 +74,74 @@ const GalleryWrapper = () => {
 				</li>
 			</ul>
 
-			<Gallery imageItems={imageItems} />
+			<Gallery imageObjs={imageObjs} />
 		</section>
   )
 }
 
-const ALL_IMAGES = graphql`
-	query HeaderQuery {
-		galleries: allPrismicGalleryBodyImageGallery {
-			edges {
-				node {
-					primary {
-						name_of_the_gallery {
-							text
-						}
-					}
-					items {
-						gallery_image {
-							fluid {
-								...GatsbyPrismicImageFluid
-							}
-							url
-						}
-					}
+const ALL_GRAPHCMS_IMAGES = graphql`
+	query GalleryQuery {
+		galleries: allGraphCmsGallery {
+			nodes {
+				title
+				id
+				images {
+					id
+					src: url
+					gatsbyImageData
 				}
+			}
+		}
+		portrait: graphCmsGallery(title: {eq: "Portrait"}) {
+			title
+			id
+			images {
+				id
+				src: url
+				gatsbyImageData
+			}
+		}
+		events: graphCmsGallery(title: {eq: "Events"}) {
+			title
+			id
+			images {
+				id
+				src: url
+				gatsbyImageData
+			}
+		}
+	}
+`
+
+const ALL_GRAPHCMS_QUERY_IMAGES = graphql`
+	query GalleryQuery {
+		galleries: allGraphCmsGallery {
+			nodes {
+				title
+				id
+				images {
+					id
+					src: url
+					gatsbyImageData
+				}
+			}
+		}
+		portrait: graphCmsGallery(title: {eq: "Portrait"}) {
+			title
+			id
+			images {
+				id
+				src: url
+				gatsbyImageData
+			}
+		}
+		events: graphCmsGallery(title: {eq: "Events"}) {
+			title
+			id
+			images {
+				id
+				src: url
+				gatsbyImageData
 			}
 		}
 	}

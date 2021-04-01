@@ -1,18 +1,11 @@
 import React, { useState, useCallback } from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import Carousel, { Modal, ModalGateway } from 'react-images'
 import GalleryItem from './GalleryItem'
-import { DEFAULT_IMAGES } from '../constants/defaultImages'
-
-import { useStaticQuery, graphql } from "gatsby"
-
-import { GatsbyImage } from "gatsby-plugin-image"
-
-import Img from 'gatsby-image'
 
 import View from './View'
 
-const Gallery = ({ imageItems }) => {
+const Gallery = ({ imageObjs }) => {
   const [lightboxIsOpen, setLightboxIsOpen] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
 
@@ -21,41 +14,46 @@ const Gallery = ({ imageItems }) => {
     setSelectedIndex(selectedIndex)
   }, [lightboxIsOpen])
 
-	const imageObjectsForCarousel = imageItems.map((obj) => {
-		return obj.gallery_image.fluid
-	})
 
-	// console.log(imageObjectsForCarousel)
+	const FooterStyleFn = (StyleObj, State) => {
+		return {
+			textShadow: `0 0 12px black, 0 0 16px black`,
+			padding: `8px`
+		}
+	}
 
   return (
-    <div>
-      {imageItems && (<div className="masonry-with-columns">
-        {imageItems.map((obj, i) => {
+		<div>
+      <div className="masonry-with-columns">
+        {imageObjs.map((imageObj, i) => {
 					return (
 						<GalleryItem
 							key={i}
-							thumbnail={obj.gallery_image.fluid}
+							imageObj={imageObj}
 							position={i}
 							toggleLightbox={toggleLightbox}
 						/>
 					); 
         })}
-        </div>
-      )}
+			</div>
       <ModalGateway>
         {lightboxIsOpen && (
           <Modal onClose={toggleLightbox}>
-            <Carousel currentIndex={selectedIndex} components={{ View }} views={imageObjectsForCarousel} />
+            <Carousel
+							currentIndex={selectedIndex}
+							views={imageObjs}
+							components={{ View }}
+							styles={{ footerCaption: FooterStyleFn }}/>
           </Modal>
         )}
       </ModalGateway>
     </div>
-  )
+	)
 }
 
 Gallery.displayName = 'Gallery'
-Gallery.propTypes = {
-  images: PropTypes.array,
-}
+// Gallery.propTypes = {
+//   images: PropTypes.array,
+// }
 
 export default Gallery

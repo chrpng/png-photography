@@ -1,32 +1,37 @@
 import React, { useCallback } from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 
-import Img from 'gatsby-image'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
-const GalleryItem = ({ thumbnail, position, toggleLightbox }) => {
+const GalleryItem = ({ imageObj, position, toggleLightbox }) => {
+	const image = getImage(imageObj)
+	// console.log('item')
+	// console.log(imageObj.src)
+	const onClick = useCallback((e) => {
+		e.preventDefault()
+		toggleLightbox(position)
+	}, [position, toggleLightbox]);
 
-    const onClick = useCallback((e) => {
-			e.preventDefault()
-			console.log("here")
-      toggleLightbox(position)
-    }, [position, toggleLightbox]);
+	const onKeyDown = (e) => {
+		if (e.key === "Enter") {
+			onClick(e)
+		}
+	}
 
-    return (
-			<div onClick={onClick}>
-				<Img fluid={thumbnail}/>
-			</div>
-		)
+	return (
+		<div role="link" tabIndex="0" onClick={onClick}>
+			<GatsbyImage image={image} alt="gallery-thumbnail" />
+			{/* <img src={imageObj.src} /> */}
+			{/* <div>test</div> */}
+		</div>
+	)
 };
 
-GalleryItem.displayName = 'GalleryItem2'
-GalleryItem.propTypes = {
-  // id: PropTypes.string.isRequired,
-  // source: PropTypes.string.isRequired,
-  // thumbnail: PropTypes.string.isRequired,
-  // caption: PropTypes.string.isRequired,
-  // description: PropTypes.string.isRequired,
-  // position: PropTypes.string.isRequired,
-  // toggleLightbox: PropTypes.func.isRequired
-}
+// GalleryItem.displayName = 'GalleryItem'
+// GalleryItem.propTypes = {
+// 	imageObj: PropTypes.object,
+// 	position: PropTypes.number,
+// 	toggleLightbox: PropTypes.func,
+// }
 
 export default GalleryItem

@@ -1,12 +1,11 @@
 import React from 'react'
-import Img from 'gatsby-image'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
-const View = ({ data }) => {
-	console.log(data)
+const View = ({ innerProps, data }) => {
+	const image = getImage(data)
 	return (
-		<div >
-			<div style={{ color: `transparent` }}>hold</div>
-			<Img fluid={data} />
+		<div { ...innerProps } style={{ textAlign: `center`, margin: `0 auto` }}>
+			<GatsbyImage image={image} alt="" />
 		</div>
 	)
 }

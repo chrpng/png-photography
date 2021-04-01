@@ -7,14 +7,10 @@ import sanitizeHtml from 'sanitize-html'
 const About = () => {
 	const data = useStaticQuery(graphql`
 		query AboutQuery {
-			prismicSection(uid: {eq: "about"}) {
-				data {
-					content {
-						html
-					}
-					title {
-						text
-					}
+			graphCmsSection(slug: {eq: "about"}) {
+				title
+				content {
+					html
 				}
 			}
 		}
@@ -23,10 +19,10 @@ const About = () => {
 		<section id="about">
 			<header className="major">
 				<h2>
-					{data.prismicSection.data.title.text}
+					{data.graphCmsSection.title}
 				</h2>
 			</header>
-			<div dangerouslySetInnerHTML={{ __html: sanitizeHtml(data.prismicSection.data.content.html) }}/>
+			<div dangerouslySetInnerHTML={{ __html: sanitizeHtml(data.graphCmsSection.content.html) }}/>
 		</section>
 	)
 }
