@@ -14,11 +14,11 @@ export default function Nav({ sections = [] }) {
           {sections.map(s => {
             return (
               <li key={s.id}>
-                {/* <Scroll type="id" element={s.id}> */}
+                <Scroll type="id" element={s.id}>
                   <a href={`#${s.id}`} id="top-link">
                     <span className={`icon ${s.icon}`}>{s.name}</span>
                   </a>
-                {/* </Scroll> */}
+                </Scroll>
               </li>
             );
           })}
