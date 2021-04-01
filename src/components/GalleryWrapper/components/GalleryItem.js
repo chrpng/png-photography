@@ -19,8 +19,8 @@ const GalleryItem = ({ imageObj, position, toggleLightbox }) => {
 	}
 
 	return (
-		<div role="link" tabIndex="0" onClick={onClick}>
-			<GatsbyImage image={image} alt="gallery-thumbnail" />
+		<div role="link" tabIndex="0" onClick={onClick} onKeyDown={onKeyDown}>
+			<GatsbyImage image={image} alt="gallery-thumbnail" /> {/* Potential Warning: Failed prop type: The prop `src` is marked as required in `U`, but its value is `undefined`. */}
 			{/* <img src={imageObj.src} /> */}
 			{/* <div>test</div> */}
 		</div>
