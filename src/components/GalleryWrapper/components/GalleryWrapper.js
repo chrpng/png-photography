@@ -59,7 +59,7 @@ const ALL_GRAPHCMS_IMAGES = graphql`
 				images {
 					id
 					src: url
-					gatsbyImageData
+					gatsbyImageData(placeholder: BLURRED, quality: 80)
 				}
 			}
 		}
