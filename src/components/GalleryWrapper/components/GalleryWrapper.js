@@ -52,7 +52,7 @@ const GalleryWrapper = () => {
 
 const ALL_GRAPHCMS_IMAGES = graphql`
 	query GalleryQuery {
-		galleries: allGraphCmsGallery {
+		galleries: allGraphCmsGallery(sort: {fields: title, order: DESC}) {
 			nodes {
 				title
 				id
