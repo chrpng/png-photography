@@ -934,6 +934,10 @@
 			color: _palette(fg-light) !important;
 			cursor: default;
 		}
+
+		&.mt-2 {
+			margin-top: 16px;
+		}
 	}
 
 /* Work Item */

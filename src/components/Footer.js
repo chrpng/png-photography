@@ -10,7 +10,7 @@ const Footer = () => (
           </a>
         </li>
         <li>
-          <a href="http://instagram.com/png_photographyy" className="icon fa-instagram">
+          <a href="http://instagram.com/png.photographyy" className="icon fa-instagram">
             <span className="label">Instagram</span>
           </a>
         </li>

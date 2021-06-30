@@ -4,7 +4,7 @@ import Helmet from 'react-helmet'
 import { GalleryWrapper } from '../components/GalleryWrapper'
 import Layout from '../components/layout'
 
-import InstaFeed from '../components/InstaFeed/InstaFeed'
+// import InstaFeed from '../components/InstaFeed/InstaFeed'
 import About from '../components/About'
 import Contact from '../components/Contact'
 
@@ -24,7 +24,7 @@ const HomeIndex = () => {
 
 				<About />
 
-				<InstaFeed />
+				{/* <InstaFeed /> */}
 
         <Contact />
       </div>
