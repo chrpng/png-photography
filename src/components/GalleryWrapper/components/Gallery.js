@@ -6,6 +6,8 @@ import GalleryItem from './GalleryItem'
 import View from './View'
 
 const Gallery = ({ imageObjs }) => {
+	const isOverflowing = imageObjs.length > 12
+	const [isShowingAll, setIsShowingAll] = useState(false)
   const [lightboxIsOpen, setLightboxIsOpen] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
 
@@ -14,6 +16,17 @@ const Gallery = ({ imageObjs }) => {
     setSelectedIndex(selectedIndex)
   }, [lightboxIsOpen])
 
+	const toggleShowingAll = () => {
+		setIsShowingAll(!isShowingAll)
+	}
+
+	const getImageObjs = () => {
+		if(isShowingAll) {
+			return imageObjs
+		} else {
+			return imageObjs.slice(0, 12)
+		}
+	}
 
 	const FooterStyleFn = (StyleObj, State) => {
 		return {
@@ -25,7 +38,7 @@ const Gallery = ({ imageObjs }) => {
   return (
 		<div>
       <div className="masonry-with-columns">
-        {imageObjs.map((imageObj, i) => {
+        {getImageObjs().map((imageObj, i) => {
 					return (
 						<GalleryItem
 							key={i}
@@ -36,6 +49,11 @@ const Gallery = ({ imageObjs }) => {
 					); 
         })}
 			</div>
+			{isOverflowing && <button className="button mt-2" onClick={toggleShowingAll}>
+				{
+					isShowingAll ? 'Show Less' : 'Show More'
+				}
+			</button>}
       <ModalGateway>
         {lightboxIsOpen && (
           <Modal onClose={toggleLightbox}>
