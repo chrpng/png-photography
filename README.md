@@ -20,3 +20,4 @@ Run `gatsby develop` in the terminal to start.
 ### Updates
 
 2021-07-13 Converted image gallery from a naive grid to s smarter row layout with react-photo-gallery. Uses Knuth and Plass line breaking algorithm to calculate rows.
+2021-07-13 Set max size for sidebar/header at larger breakpoints so image take up more of the available space.
