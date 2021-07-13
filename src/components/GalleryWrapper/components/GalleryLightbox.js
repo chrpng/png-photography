@@ -3,7 +3,6 @@ import React, { useState, useCallback } from 'react'
 import Carousel, { Modal, ModalGateway } from 'react-images'
 import Gallery from 'react-photo-gallery'
 import GalleryItem from './GalleryItem'
-import { photos } from './photos'
 
 import View from './View'
 
@@ -49,18 +48,6 @@ const GalleryLightbox = ({ imageObjs }) => {
 
   return (
 		<div>
-      {/* <div className="masonry-with-columns">
-        {getImageObjs().map((imageObj, i) => {
-					return (
-						<GalleryItem
-							key={i}
-							imageObj={imageObj}
-							position={i}
-							toggleLightbox={toggleLightbox}
-						/>
-					); 
-        })}
-			</div> */}
 			<Gallery photos={getImageObjs()} renderImage={imageRenderer} />
 			{isOverflowing && <button className="button mt-2" onClick={toggleShowingAll}>
 				{

@@ -9,8 +9,8 @@ import About from '../components/About'
 import Contact from '../components/Contact'
 
 const HomeIndex = () => {
-  const siteTitle = 'Gatsby Starter - Strata'
-  const siteDescription = 'Site description'
+  const siteTitle = 'Png Photography'
+  const siteDescription = 'Portfolio of Victoria Png'
 
   return (
     <Layout>
