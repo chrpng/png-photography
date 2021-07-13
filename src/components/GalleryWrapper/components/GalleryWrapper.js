@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Gallery from './Gallery'
+import GalleryLightbox from './GalleryLightbox'
 
 import { useStaticQuery, graphql } from "gatsby"
 
@@ -45,7 +45,7 @@ const GalleryWrapper = () => {
 				</li>
 			</ul>
 
-			<Gallery imageObjs={imageObjs} />
+			<GalleryLightbox imageObjs={imageObjs} />
 		</section>
   )
 }
@@ -60,6 +60,9 @@ const ALL_GRAPHCMS_IMAGES = graphql`
 					id
 					src: url
 					gatsbyImageData(placeholder: BLURRED, quality: 80)
+					height
+					width
+					fileName
 				}
 			}
 		}

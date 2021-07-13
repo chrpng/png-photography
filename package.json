@@ -21,6 +21,7 @@
     "react-helmet": "^5.2.1",
     "react-hook-form": "^6.15.5",
     "react-images": "^1.0.0",
+    "react-photo-gallery": "^8.0.0",
     "react-scrollspy": "^3.4.3",
     "sanitize-html": "^2.3.3",
     "smoothscroll-polyfill": "^0.4.4"
