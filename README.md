@@ -16,3 +16,7 @@ Install this starter (assuming Gatsby is installed) by running from your CLI:
 `gatsby new gatsby-starter-strata https://github.com/codebushi/gatsby-starter-strata`
 
 Run `gatsby develop` in the terminal to start.
+
+### Updates
+
+2021-07-13 Converted image gallery from a naive grid to s smarter row layout with react-photo-gallery. Uses Knuth and Plass line breaking algorithm to calculate rows.
