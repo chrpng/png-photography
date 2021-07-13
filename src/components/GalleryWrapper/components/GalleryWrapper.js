@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Gallery from './Gallery'
+import GalleryLightbox from './GalleryLightbox'
 
 import { useStaticQuery, graphql } from "gatsby"
 
@@ -45,21 +45,24 @@ const GalleryWrapper = () => {
 				</li>
 			</ul>
 
-			<Gallery imageObjs={imageObjs} />
+			<GalleryLightbox imageObjs={imageObjs} />
 		</section>
   )
 }
 
 const ALL_GRAPHCMS_IMAGES = graphql`
 	query GalleryQuery {
-		galleries: allGraphCmsGallery {
+		galleries: allGraphCmsGallery(sort: {fields: title, order: DESC}) {
 			nodes {
 				title
 				id
 				images {
 					id
 					src: url
-					gatsbyImageData(placeholder: BLURRED, quality: 80)
+					gatsbyImageData(placeholder: DOMINANT_COLOR, quality: 80)
+					height
+					width
+					fileName
 				}
 			}
 		}

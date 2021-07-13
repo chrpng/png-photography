@@ -41,6 +41,7 @@
 	));
 
 	$size-header-width: 35%;
+	$max-size-header-width: 380px;
 	$size-header-pad: 4em;
 
 /* Basic */
@@ -934,6 +935,10 @@
 			color: _palette(fg-light) !important;
 			cursor: default;
 		}
+
+		&.mt-2 {
+			margin-top: 16px;
+		}
 	}
 
 /* Work Item */
@@ -978,6 +983,7 @@
 		text-align: right;
 		top: 0;
 		width: $size-header-width;
+		max-width: $max-size-header-width;
 
 		> * {
 			@include vendor('flex-shrink', '0');
@@ -1105,7 +1111,6 @@
 
 	#main {
 		margin-left: $size-header-width;
-		max-width: 50em + $size-header-pad;
 		padding: 0 $size-header-pad $size-header-pad $size-header-pad;
 		width: calc(100% - #{$size-header-width});
 
@@ -1120,6 +1125,10 @@
 				padding-top: ($size-header-pad * 2);
 			}
 		}
+	}
+
+	@media (min-width: 1430px) {
+
 	}
 
 /* Poptrox */
@@ -1305,6 +1314,11 @@
 			body, input, select, textarea {
 				font-size: 12pt;
 			}
+			
+			#main {
+				margin-left: $max-size-header-width;
+				width: calc(100% - #{$max-size-header-width});
+			}
 
 	}
 
@@ -1393,6 +1407,7 @@
 				text-align: center;
 				top: auto;
 				width: 100%;
+				max-width: none;
 				display: block;
 
 				h1 {
@@ -1466,11 +1481,6 @@
 						padding-top: ($size-header-pad * 1.5);
 					}
 				}
-			}
-		/* Gallery */
-		
-			.masonry-with-columns {
-				grid-auto-rows: 16vw;
 			}
 	}
 

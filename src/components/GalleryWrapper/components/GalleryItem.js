@@ -3,10 +3,10 @@ import React, { useCallback } from 'react'
 
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
-const GalleryItem = ({ imageObj, position, toggleLightbox }) => {
+const GalleryItem = ({ position, toggleLightbox, imageObj, margin }) => {
 	const image = getImage(imageObj)
-	// console.log('item')
-	// console.log(imageObj.src)
+	const imgStyle = { margin: margin, height: imageObj.height, width: imageObj.width }
+
 	const onClick = useCallback((e) => {
 		e.preventDefault()
 		toggleLightbox(position)
@@ -19,10 +19,12 @@ const GalleryItem = ({ imageObj, position, toggleLightbox }) => {
 	}
 
 	return (
-		<div role="link" tabIndex="0" onClick={onClick} onKeyDown={onKeyDown}>
-			<GatsbyImage image={image} alt="gallery-thumbnail" /> {/* Potential Warning: Failed prop type: The prop `src` is marked as required in `U`, but its value is `undefined`. */}
-			{/* <img src={imageObj.src} /> */}
-			{/* <div>test</div> */}
+		<div
+			role="link" tabIndex="0"
+			onClick={onClick} onKeyDown={onKeyDown}
+			style={imgStyle}
+		>
+			<GatsbyImage image={image} alt="gallery-thumbnail" />
 		</div>
 	)
 };
