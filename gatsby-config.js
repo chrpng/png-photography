@@ -6,7 +6,9 @@ module.exports = {
   siteMetadata: {
     title: 'Png.Photography',
     author: 'Victoria Png',
-    description: 'Photography portfolio for Victoria Png',
+    description: `Boston area photographer capturing events and special occasions - engagements, anniversaries, and life's treasures`,
+    keywords: ['Boston', 'Waltham', 'photography', 'photography', 'event', 'special occasion', 'anniversary', 'birthday', 'photograph', 'headshot', 'portrait', 'photo'],
+    siteUrl: 'https://png-photography.com'
   },
   plugins: [
     'gatsby-plugin-react-helmet',
