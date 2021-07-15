@@ -24,11 +24,11 @@ Also is now loading different images for thumbnail (smaller) and lightbox view (
 
 2021-07-15 Added SEO
 2021-07-15 BUGFIX: Fixed layout at extra large resolutions (1800px+). Media queries were not capturing extra large resolutions.
+2021-07-15 BUGFIX: Fixed Lightbox View so image fit relative to screen is contain and not cover (used GatsbyImage imgStyle prop)
 
 ### Need to do
 
 * BUG: (Potential) Lightbox View doesn't load on click in build. Clicking arrows does work.
-* BUG: Fix Lightbox View so it's contain and not cover
 * Continuous deployment
 * Add webhook so GraphCMS can trigger Netlify builds
 * Instagram feed
