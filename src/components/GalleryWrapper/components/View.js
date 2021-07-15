@@ -5,7 +5,7 @@ const View = ({ innerProps, data }) => {
 	const image = getImage(data)
 	return (
 		<div { ...innerProps } style={{ textAlign: `center`, margin: `0 auto` }}>
-			<GatsbyImage image={image} alt="" />
+			<GatsbyImage image={image} alt="" style={{ objectFit: 'contain' }}/>
 		</div>
 	)
 }

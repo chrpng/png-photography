@@ -19,11 +19,17 @@ This also requires sourcing image data from GraphCMS.
 
 2021-07-13 Set max size for sidebar/header at larger breakpoints so image take up more of the available space.
 
+2021-07-14 Fix issue where gatsby-plugin-image does not pass sizes attribute and thus always picks the largest image to load. Passed in sizes prop manually.
+Also is now loading different images for thumbnail (smaller) and lightbox view (larger)
+
 ### Need to do
+* BUG: Unintentional layout of #main element on 1920w+
+* BUG: Lightbox View doesn't load on click in build. Clicking arrows does work.
+* BUG: Fix Lightbox View so it's contain and not cover
 * Continuous deployment
 * Add webhook so GraphCMS can trigger Netlify builds
-* Fix Lightbox View so it's contain and not cover
 * Instagram feed
 * SEO Optimization
 * Memoize galleries so load time upon switching back to already loaded gallery is faster? (Placeholder on initial query loads fast, but switching afterwards is slow)
+* useCallback for functions that can benefit
 * WYSIWYG (optional)

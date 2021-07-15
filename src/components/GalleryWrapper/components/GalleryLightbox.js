@@ -12,16 +12,21 @@ const GalleryLightbox = ({ imageObjs }) => {
   const [lightboxIsOpen, setLightboxIsOpen] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
 
-  const toggleLightbox = useCallback(selectedIndex => {
-    setLightboxIsOpen(!lightboxIsOpen)
-    setSelectedIndex(selectedIndex)
-  }, [lightboxIsOpen])
+	const openLightbox = useCallback((event, { index }) => {
+    setSelectedIndex(index);
+    setLightboxIsOpen(true);
+  }, []);
+
+	const closeLightbox = () => {
+		setSelectedIndex(0);
+		setLightboxIsOpen(false);
+	}
 
 	const toggleShowingAll = () => {
 		setIsShowingAll(!isShowingAll)
 	}
 
-	const getImageObjs = () => {
+	const getThumbnailObjs = () => {
 		if(isShowingAll) {
 			return imageObjs
 		} else {
@@ -36,19 +41,14 @@ const GalleryLightbox = ({ imageObjs }) => {
 		}
 	}
 
-	const imageRenderer = useCallback(({ index, photo, margin }) => {
-		return <GalleryItem
-			key={index}
-			position={index}
-			imageObj={photo}
-			toggleLightbox={toggleLightbox}
-			margin={margin}
-		/>
-	})
-
   return (
 		<div>
-			<Gallery photos={getImageObjs()} renderImage={imageRenderer} />
+			<Gallery 
+				photos={getThumbnailObjs()}
+				renderImage={GalleryItem}
+				onClick={openLightbox}
+				targetRowHeight={200}
+			/>
 			{isOverflowing && <button className="button mt-2" onClick={toggleShowingAll}>
 				{
 					isShowingAll ? 'Show Less' : 'Show More'
@@ -56,7 +56,7 @@ const GalleryLightbox = ({ imageObjs }) => {
 			</button>}
 			<ModalGateway>
 				{lightboxIsOpen && (
-					<Modal onClose={toggleLightbox}>
+					<Modal onClose={closeLightbox}>
 						<Carousel
 							currentIndex={selectedIndex}
 							views={imageObjs}

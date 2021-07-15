@@ -1,16 +1,24 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 // import PropTypes from 'prop-types'
 
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
-const GalleryItem = ({ position, toggleLightbox, imageObj, margin }) => {
-	const image = getImage(imageObj)
-	const imgStyle = { margin: margin, height: imageObj.height, width: imageObj.width }
+const imgWithClick = { cursor: 'pointer' }
 
-	const onClick = useCallback((e) => {
-		e.preventDefault()
-		toggleLightbox(position)
-	}, [position, toggleLightbox]);
+const GalleryItem = ({ index, onClick, photo, margin, direction, top, left, key }) => {
+	const image = getImage(photo) // photo is gatsbyImageData
+	
+	const imgStyle = { margin: margin, display: 'block', width: photo.width, height: photo.height }
+
+	// const handleClick = useCallback((e) => {
+	// 	e.preventDefault()
+	// 	toggleLightbox(index)
+	// }, [index, toggleLightbox]);
+
+	const handleClick = (_e) => {
+		console.log(image)
+		onClick(_e, { index })
+	}
 
 	const onKeyDown = (e) => {
 		if (e.key === "Enter") {
@@ -20,19 +28,26 @@ const GalleryItem = ({ position, toggleLightbox, imageObj, margin }) => {
 
 	return (
 		<div
-			role="link" tabIndex="0"
-			onClick={onClick} onKeyDown={onKeyDown}
-			style={imgStyle}
+			role="link"
+			tabIndex="0"
+      key={key}
+      style={onClick ? { ...imgStyle, ...imgWithClick } : imgStyle}
+      onClick={onClick ? handleClick : null}
+			onKeyDown={onKeyDown}
 		>
-			<GatsbyImage image={image} alt="gallery-thumbnail" />
+			<GatsbyImage
+				image={image}
+				alt="gallery-thumbnail"
+				sizes="(min-width: 1280px) 400px, 200px"
+			/>
 		</div>
 	)
 };
 
 // GalleryItem.displayName = 'GalleryItem'
 // GalleryItem.propTypes = {
-// 	imageObj: PropTypes.object,
-// 	position: PropTypes.number,
+// 	photo: PropTypes.object,
+// 	index: PropTypes.number,
 // 	toggleLightbox: PropTypes.func,
 // }
 

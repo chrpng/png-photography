@@ -43,6 +43,11 @@ class Scroll extends React.Component {
       ? this.scrollTo(elem, offset, timeout)
       : console.log(`Element not found: ${element}`); // eslint-disable-line
   }
+	onKeyDown(e) {
+		if (e.key === "Enter") {
+			this.handleClick(e)
+		}
+	}
   scrollTo(element, offSet = 0, timeout = null) {
     const elemPos = element
       ? element.getBoundingClientRect().top + window.pageYOffset
@@ -61,7 +66,7 @@ class Scroll extends React.Component {
         {typeof this.props.children === 'object' ? (
           React.cloneElement(this.props.children, { onClick: this.handleClick })
         ) : (
-          <span onClick={this.handleClick}>{this.props.children}</span>
+          <span role="link" tabIndex="0" onKeyDown={this.onKeyDown} onClick={this.handleClick}>{this.props.children}</span>
         )}
       </Element>
     );

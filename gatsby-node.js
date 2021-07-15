@@ -6,6 +6,17 @@
 
 // You can delete this file if you're not using it
 const path = require("path")
+
+exports.onCreateWebpackConfig = ({ actions }) => {
+	actions.setWebpackConfig({
+		resolve: {
+			fallback: {
+				path: false, // this may need to be set to require.resolve("crypto-browserify")
+			}
+		}
+	})
+}
+
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const pages = await graphql(`

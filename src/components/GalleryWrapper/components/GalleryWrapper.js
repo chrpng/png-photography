@@ -59,10 +59,14 @@ const ALL_GRAPHCMS_IMAGES = graphql`
 				images {
 					id
 					src: url
-					gatsbyImageData(placeholder: DOMINANT_COLOR, quality: 80)
-					height
-					width
-					fileName
+					gatsbyImageData(
+						placeholder: DOMINANT_COLOR
+						quality: 50
+						outputPixelDensities: [0.0625, 0.125]
+						)
+						width
+						height
+						fileName
 				}
 			}
 		}
