@@ -47,7 +47,7 @@ const GalleryLightbox = ({ imageObjs }) => {
 				photos={getThumbnailObjs()}
 				renderImage={GalleryItem}
 				onClick={openLightbox}
-				targetRowHeight={200}
+				targetRowHeight={300}
 			/>
 			{isOverflowing && <button className="button mt-2" onClick={toggleShowingAll}>
 				{
