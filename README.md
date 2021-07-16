@@ -28,10 +28,10 @@ Also is now loading different images for thumbnail (smaller) and lightbox view (
 
 ### Need to do
 
-* BUG: (Potential) Lightbox View doesn't load on click in build. Clicking arrows does work.
+* BUG: (Potential) Lightbox View current view loads very slow. Adjacent view with the side arrows seem to load faster.
 * Continuous deployment
 * Add webhook so GraphCMS can trigger Netlify builds
-* Instagram feed
+* Instagram feed - either dynamically sourced (hybrid component) or static (build time graphql)
 * Memoize galleries so load time upon switching back to already loaded gallery is faster? (Placeholder on initial query loads fast, but switching afterwards is slow)
 * useCallback for functions that can benefit
 * WYSIWYG (optional)
